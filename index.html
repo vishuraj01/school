@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Threads - Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            max-width: 50px;
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        .title {
+            color: white;
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .registration-container {
+            position: relative;
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease; /* Fade in animation */
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            color: #555;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: right;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .social-button {
+            background-color: #fff;
+            color: #333;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin-right: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-button:last-child {
+            margin-right: 0;
+        }
+
+        .social-button:hover {
+            background-color: #f2f2f2;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+        }
+
+        p a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- Add these styles to your existing <style> section -->
+    <style>
+        /* ... (existing styles) ... */
+
+        .registration-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="logo-container">
+        <img id="logo" src="logo.jpg" alt="Stellar Threads Logo">
+        <h1 class="title">Stellar Threads</h1>
+    </div>
+
+    <div class="registration-container">
+        <h2>Register</h2>
+        <form id="registrationForm">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" required>
+
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+
+            <!-- Confirm Password -->
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" required>
+
+            <!-- Password Strength Indicator (optional) -->
+            <div id="password-strength"></div>
+
+            <button type="button" onclick="register()">Register</button>
+            <div class="error-message" id="registrationErrorMessage"></div>
+            
+            <!-- Terms of Service and Privacy Policy -->
+            <p>By registering, you agree to our <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a>.</p>
+        </form>
+       
+        <!-- Already have an account? Login -->
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <!-- Your existing scripts here -->
+
+    <script>
+   
+        // Password Strength Indicator (optional)
+        var passwordStrength = document.getElementById('password-strength');
+        var passwordField = document.getElementById('newPassword');
+
+        passwordField.addEventListener('input', function () {
+            var strength = checkPasswordStrength(passwordField.value);
+            updatePasswordStrengthIndicator(strength);
+        });
+
+        function checkPasswordStrength(password) {
+            // Implement your password strength checking logic here
+            // Return a value between 0 and 100
+            // You can use libraries like zxcvbn for password strength estimation
+            // For simplicity, this example assumes a length-based strength
+            return Math.min(password.length * 10, 100);
+        }
+
+        function updatePasswordStrengthIndicator(strength) {
+            passwordStrength.style.width = strength + '%';
+            passwordStrength.style.backgroundColor = getStrengthColor(strength);
+        }
+
+        function getStrengthColor(strength) {
+            // Customize the color based on the strength
+            if (strength < 30) {
+                return '#e74c3c'; // Red
+            } else if (strength < 70) {
+                return '#f39c12'; // Orange
+            } else {
+                return '#2ecc71'; // Green
+            }
+        }
+
+       
+        function register() {
+            var fullName = document.getElementById('fullName').value;
+            var email = document.getElementById('email').value;
+            var newUsername = document.getElementById('newUsername').value;
+            var newPassword = document.getElementById('newPassword').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var registrationErrorMessage = document.getElementById('registrationErrorMessage');
+
+           // Password matching logic
+            if (newPassword !== confirmPassword) {
+                registrationErrorMessage.innerHTML = 'Passwords do not match.';
+                return;
+            }
+
+            // Add your registration logic here
+            // Include email verification, CAPTCHA, etc.
+
+            // For this example, assume successful registration
+            registrationErrorMessage.innerHTML = '';
+            alert('Registration successful!');
+            // Redirect to the new page or perform other actions
+            window.location.href = 'login.html';
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Threads - Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            max-width: 50px;
+            max-height: 50px;
+            margin-right: 10px;
+        }
+
+        .title {
+            color: white;
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container {
+            position: relative;
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease; /* Fade in animation */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #3498db;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            color: #555;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: right;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #3498db;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            color: #333;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            flex-grow: 1;
+            margin-right: 5px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-button img {
+            max-width: 24px;
+            max-height: 24px;
+            margin-right: 5px;
+        }
+
+        .social-button:last-child {
+            margin-right: 0;
+        }
+
+        .social-button:hover {
+            background-color: #f2f2f2;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+        }
+
+        p a {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="logo-container">
+        <img id="logo" src="logo.jpg" alt="Stellar Threads Logo">
+        <h1 class="title">Stellar Threads</h1>
+    </div>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+
+            <label for="password">Password:</label>
+            <div style="position: relative;">
+                <input type="password" id="password" required>
+                <span class="password-toggle" onclick="togglePassword()">Show Password</span>
+            </div>
+
+            <button type="button" onclick="login()">Login</button>
+            <div class="error-message" id="errorMessage"></div>
+            <label for="rememberMe">
+                <input type="checkbox" id="rememberMe"> Remember me
+            </label>
+        </form>
+
+        <div class="social-buttons">
+            <a href="https://www.facebook.com" target="_blank" class="social-button">
+                <img src="facebook.jpg" alt="Facebook Logo"> Facebook
+            </a>
+            <a href="https://www.google.com" target="_blank" class="social-button">
+                <img src="google.jpg" alt="Google Logo"> Google
+            </a>
+        </div>
+
+        <p><a href="forgot-password.html">Forgot your password?</a></p>
+        <p>Don't have an account? <a href="index.html">Register</a></p>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var rememberMe = document.getElementById('rememberMe').checked;
+            var errorMessage = document.getElementById('errorMessage');
+
+            // Add your authentication logic here
+
+            if (username === 'vishwajeetraj' && password === 'intheheaven') {
+                errorMessage.innerHTML = ''; // Clear previous error messages
+                alert('Login successful!');
+                // Redirect to the new page or perform other actions
+                window.location.href = 'home.html';
+            } else {
+                errorMessage.innerHTML = 'Invalid username or password. Please try again.';
+            }
+        }
+
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var passwordToggle = document.querySelector('.password-toggle');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordToggle.textContent = 'Hide Password';
+            } else {
+                passwordField.type = 'password';
+                passwordToggle.textContent = 'Show Password';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
